@@ -1,19 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class ExtendedText : MonoBehaviour, I_UI_Element
 {
 
     [SerializeField] private string _alias;
+    [SerializeField] private AliasEntityTag _tag;
+    [SerializeField] private UIElementStatus _status;
 
-    public UIElementStatus Status { get; set; }
+    private I_UI_Element _parent;
+    private List<I_UI_Element> _childs;
 
-    public MonoBehaviour MonoBehaviour { get => this; set { } }
+
+
 
     [SerializeField]
     private UnityEvent _beforeOpen;
@@ -45,12 +47,12 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
 
 
 
-
-    public virtual void ConfigurationsAwake()
+    
+    public void ConfigurationsAwake_()
     {
 
     }
-    public virtual void ConfigurationsStart()
+    public void ConfigurationsStart_()
     {
 
     }
@@ -58,12 +60,16 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
 
 
     #region GetterSetter
+    public UIElementStatus Status { get => _status; set => _status = value; }
+
+    public MonoBehaviour MonoBehaviour { get => this; }
     public UnityEvent BeforeOpen { get { return _beforeOpen; } set { _beforeOpen = value; } }
     public UnityEvent AfterOpen { get { return _afterOpen; } set { _afterOpen = value; } }
     public UnityEvent BeforeClose { get { return _beforeClose; } set { _beforeClose = value; } }
     public UnityEvent AfterClose { get { return _afterClose; } set { _afterClose = value; } }
 
     public string Alias { get => _alias; set => _alias = value; }
+    public AliasEntityTag Tag { get => _tag; set => _tag = value; }
 
     public UIElementType ElementType => UIElementType.Text;
 
@@ -84,6 +90,9 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
     }
 
     public TextMethod TextMethod { get => textMethod; set => textMethod = value; }
+    public I_UI_Element Parent { get => _parent; set => _parent = value; }
+
+    public List<I_UI_Element> Childs { get => _childs; set => _childs = value; }
 
     #endregion
 

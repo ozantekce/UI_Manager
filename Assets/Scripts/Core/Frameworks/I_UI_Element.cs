@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public interface I_UI_Element : IAliasEntity
 {
 
+
+    public I_UI_Element Parent { get; set; }
+    public List<I_UI_Element> Childs { get; set; }
+
     public UIElementType ElementType { get; }
     public UIElementStatus Status { get; set; }
-    public MonoBehaviour MonoBehaviour { get; set; }
+    public MonoBehaviour MonoBehaviour { get; }
 
     #region Events
     public UnityEvent BeforeOpen { get; set; }
@@ -21,9 +25,32 @@ public interface I_UI_Element : IAliasEntity
 
 
 
-    public void ConfigurationsAwake();
+    public void ConfigurationsAwake()
+    {
+        Transform parentTransform = MonoBehaviour.transform.parent;
+        if (parentTransform == null)
+        {
+            Parent = parentTransform.GetComponent<I_UI_Element>();
+        }
+        Childs = new List<I_UI_Element>();
+        foreach (Transform child in MonoBehaviour.transform)
+        {
+            I_UI_Element c = child.GetComponent<I_UI_Element>();
+            if (c != null)
+            {
+                Childs.Add(c);
+            }
+        }
+        ConfigurationsAwake_();
+    }
 
-    public void ConfigurationsStart();
+    public void ConfigurationsStart()
+    {
+        ConfigurationsStart_();
+    }
+
+    public void ConfigurationsAwake_();
+    public void ConfigurationsStart_();
 
 
     public void Open()

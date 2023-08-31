@@ -42,9 +42,23 @@ public class UI_Manager : MonoBehaviour
             List<I_UI_Element> temp = _typeElements.GetValueOrDefault(ie.ElementType, new List<I_UI_Element>());
             temp.Add(ie);
             _typeElements[ie.ElementType] = temp;
+
+            ie.ConfigurationsAwake();
         }
 
 
+
+
+    }
+
+
+    private void Start()
+    {
+        foreach (MonoBehaviour uiElement in _uiElements)
+        {
+            I_UI_Element ie = uiElement as I_UI_Element;
+            ie.ConfigurationsStart();
+        }
 
     }
 
@@ -324,6 +338,17 @@ public static class UI_ManagerExtensions
     public static void OpenUIElement(this I_UI_Element element, float delay = 0)
     {
         UI_Manager.Instance.OpenUIElement(element, delay);
+    }
+
+    public static void CloseUIElement(this string alias, float delay = 0)
+    {
+        I_UI_Element element = alias.GetEntity<I_UI_Element>();
+        UI_Manager.Instance.CloseUIElement(element, delay);
+    }
+
+    public static void CloseUIElement(this I_UI_Element element, float delay = 0)
+    {
+        UI_Manager.Instance.CloseUIElement(element, delay);
     }
 
     public static void LoadScene(this string sceneName, float delay = 0)

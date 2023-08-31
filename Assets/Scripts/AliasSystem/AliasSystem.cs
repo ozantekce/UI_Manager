@@ -69,7 +69,7 @@ public sealed class AliasSystem : MonoBehaviour
                 if (entity is IAliasEntity)
                 {
                     allEntities.Add(entity);
-                    AddEntity(entity.GetComponent<IAliasEntity>(), entity.name);
+                    AddEntity(entity.GetComponent<IAliasEntity>());
                 }
             }
         }
@@ -79,11 +79,11 @@ public sealed class AliasSystem : MonoBehaviour
     }
 
 
-    public void AddEntity(IAliasEntity entity, string gameObjectName = null)
+    public void AddEntity(IAliasEntity entity)
     {
-        if (string.IsNullOrEmpty(entity.Alias) && !string.IsNullOrEmpty(gameObjectName))
+        if (string.IsNullOrEmpty(entity.Alias) && entity is MonoBehaviour behaviour)
         {
-            entity.Alias = gameObjectName;
+            entity.Alias = behaviour.name;
         }
         if(_aliasToEntity.ContainsKey(entity.Alias))
         {
@@ -124,9 +124,9 @@ public sealed class AliasSystem : MonoBehaviour
 public static class AliasSystemExtensions
 {
 
-    public static void AddToAliasSystem(this IAliasEntity entity, string gameObjectName = null)
+    public static void AddToAliasSystem(this IAliasEntity entity)
     {
-        AliasSystem.Instance.AddEntity(entity, gameObjectName);
+        AliasSystem.Instance.AddEntity(entity);
     }
 
 

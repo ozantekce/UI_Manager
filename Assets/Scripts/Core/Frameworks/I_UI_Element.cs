@@ -41,6 +41,16 @@ public interface I_UI_Element : IAliasEntity
                 Childs.Add(c);
             }
         }
+
+        if (MonoBehaviour.gameObject.activeSelf)
+        {
+            Status = UIElementStatus.Opened;
+        }
+        else
+        {
+            Status = UIElementStatus.Closed;
+        }
+
         ConfigurationsAwake_();
     }
 

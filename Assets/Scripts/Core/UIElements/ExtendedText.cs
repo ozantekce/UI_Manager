@@ -26,6 +26,12 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
     private UnityEvent _afterClose;
 
 
+    [SerializeField]
+    private UI_Animation _openAnimation;
+    [SerializeField]
+    private UI_Animation _closeAnimation;
+
+
     public ExtendedTextType textType = ExtendedTextType.TextMeshPro;
     [ShowInEnum("textType", "TextMeshPro")]
     public TextMeshProUGUI textMeshPro;
@@ -91,6 +97,8 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
     public I_UI_Element Parent { get => _parent; set => _parent = value; }
 
     public List<I_UI_Element> Childs { get => _childs; set => _childs = value; }
+    public UI_Animation OpenAnimation { get => _openAnimation; set => _openAnimation = value; }
+    public UI_Animation CloseAnimation { get => _closeAnimation; set => _closeAnimation = value; }
 
     #endregion
 

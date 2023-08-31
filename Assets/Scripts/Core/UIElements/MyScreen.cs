@@ -23,6 +23,11 @@ public class MyScreen : MonoBehaviour, I_UI_Element
     [SerializeField]
     private UnityEvent _afterClose;
 
+    [SerializeField]
+    private UI_Animation _openAnimation;
+    [SerializeField]
+    private UI_Animation _closeAnimation;
+
     public void ConfigurationsAwake_()
     {
 
@@ -49,6 +54,9 @@ public class MyScreen : MonoBehaviour, I_UI_Element
     public I_UI_Element Parent { get =>_parent; set => _parent = value; }
 
     public List<I_UI_Element> Childs { get =>  _childs; set => _childs = value;}
+
+    public UI_Animation OpenAnimation { get => _openAnimation; set => _openAnimation = value; }
+    public UI_Animation CloseAnimation { get => _closeAnimation; set => _closeAnimation = value; }
 
     #endregion
 }

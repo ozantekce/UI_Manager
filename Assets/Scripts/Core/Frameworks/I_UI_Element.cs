@@ -23,7 +23,8 @@ public interface I_UI_Element : IAliasEntity
     public UnityEvent AfterClose { get; set; }
     #endregion
 
-
+    public UI_Animation OpenAnimation { get; set; }
+    public UI_Animation CloseAnimation { get; set; }
 
     public void ConfigurationsAwake()
     {
@@ -73,12 +74,14 @@ public interface I_UI_Element : IAliasEntity
         if (Status != UIElementStatus.Closed) yield break;
 
         Status = UIElementStatus.Opening;
-        if (BeforeOpen != null) BeforeOpen.Invoke();
+        BeforeOpen?.Invoke();
+
+        if (OpenAnimation != null) yield return OpenAnimation.Enumerator(this);
 
         if (Status != UIElementStatus.Opening) yield break;
         OpenNow();
 
-        if (AfterOpen != null) AfterOpen.Invoke();
+        AfterOpen?.Invoke();
     }
 
 
@@ -102,12 +105,14 @@ public interface I_UI_Element : IAliasEntity
         if (Status != UIElementStatus.Opened) yield break;
 
         Status = UIElementStatus.Closing;
-        if (BeforeClose != null) BeforeClose.Invoke();
+        BeforeClose?.Invoke();
+
+        if (CloseAnimation != null) yield return CloseAnimation.Enumerator(this);
 
         if (Status != UIElementStatus.Closing) yield break;
         CloseNow();
 
-        if (AfterClose != null) AfterClose.Invoke();
+        AfterClose?.Invoke();
     }
 
     private void CloseNow()

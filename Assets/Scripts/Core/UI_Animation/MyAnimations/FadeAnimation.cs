@@ -12,7 +12,7 @@ public class FadeAnimation : UI_Animation
     public float duration;
     public float fadeStart;
     public float fadeEnd;
-    public bool  withChild;
+    public bool  withChilds;
 
     public override IEnumerator Enumerator(I_UI_Element element)
     {
@@ -20,9 +20,27 @@ public class FadeAnimation : UI_Animation
         element.MonoBehaviour.gameObject.SetActive(true);
         Image image = element.MonoBehaviour.GetComponent<Image>();
 
+
+        Image[] childs = null;
+        if (withChilds)
+        {
+            childs = element.MonoBehaviour.GetComponentsInChildren<Image>();
+        }
+
+
         Color c = image.color;
         c.a = fadeStart;
         image.color = c;
+
+        if(childs != null )
+        {
+            foreach (Image childImage in childs)
+            {
+                Color cc = childImage.color;
+                cc.a = fadeStart;
+                childImage.color = cc;
+            }
+        }
 
         float timer = 0;
         float deltaFade = (fadeEnd - fadeStart)/duration;
@@ -33,7 +51,18 @@ public class FadeAnimation : UI_Animation
 
             c.a += deltaTime * deltaFade;
             image.color = c;
-            
+
+            if (childs != null)
+            {
+                foreach (Image childImage in childs)
+                {
+                    Color cc = childImage.color;
+                    cc.a = c.a;
+                    childImage.color = cc;
+                }
+            }
+
+
             yield return null;
         }
 

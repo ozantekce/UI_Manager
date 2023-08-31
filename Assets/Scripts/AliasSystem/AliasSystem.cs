@@ -16,8 +16,6 @@ public sealed class AliasSystem : MonoBehaviour
 
     private Dictionary<string, IAliasEntity> _aliasToEntity = new Dictionary<string, IAliasEntity>();
 
-    private Dictionary<AliasEntityTag, List<IAliasEntity>> _tagToEntities = new Dictionary<AliasEntityTag, List<IAliasEntity>>();
-
 
     private void Awake()
     {
@@ -28,11 +26,7 @@ public sealed class AliasSystem : MonoBehaviour
         }
         MakeSingleton();
 
-        for (int i = 0; i < _aliasEntities.Length; i++)
-        {
-            IAliasEntity temp = _aliasEntities[i].GetComponent<IAliasEntity>();
-            AddEntity(temp);
-        }
+        FindAllEntitiesRuntime();
 
     }
 
@@ -61,18 +55,42 @@ public sealed class AliasSystem : MonoBehaviour
     }
 
 
-    public void AddEntity(IAliasEntity entity)
+    public void FindAllEntitiesRuntime()
     {
+
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        List<MonoBehaviour> allEntities = new List<MonoBehaviour>();
+        foreach (GameObject rootGameObject in currentScene.GetRootGameObjects())
+        {
+            MonoBehaviour[] subs = rootGameObject.GetComponentsInChildren<MonoBehaviour>(true);
+            foreach (MonoBehaviour entity in subs)
+            {
+                if (entity is IAliasEntity)
+                {
+                    allEntities.Add(entity);
+                    AddEntity(entity.GetComponent<IAliasEntity>(), entity.name);
+                }
+            }
+        }
+
+        _aliasEntities = allEntities.ToArray();
+
+    }
+
+
+    public void AddEntity(IAliasEntity entity, string gameObjectName = null)
+    {
+        if (string.IsNullOrEmpty(entity.Alias) && !string.IsNullOrEmpty(gameObjectName))
+        {
+            entity.Alias = gameObjectName;
+        }
         if(_aliasToEntity.ContainsKey(entity.Alias))
         {
             Debug.LogError("Alias should be unique !!! "+" alias : "+entity.Alias);
             return;
         }
         _aliasToEntity.Add(entity.Alias, entity);
-
-        List<IAliasEntity> list = _tagToEntities.GetValueOrDefault(entity.Tag, new List<IAliasEntity>());
-        list.Add(entity);
-        _tagToEntities[entity.Tag] = list;
 
     }
 
@@ -106,9 +124,9 @@ public sealed class AliasSystem : MonoBehaviour
 public static class AliasSystemExtensions
 {
 
-    public static void AddToAliasSystem(this IAliasEntity entity)
+    public static void AddToAliasSystem(this IAliasEntity entity, string gameObjectName = null)
     {
-        AliasSystem.Instance.AddEntity(entity);
+        AliasSystem.Instance.AddEntity(entity, gameObjectName);
     }
 
 

@@ -175,7 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: Text1
-  _tag: 0
   _status: 2
   _beforeOpen:
     m_PersistentCalls:
@@ -319,7 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: a2
-  _tag: 0
 --- !u!4 &131670009
 Transform:
   m_ObjectHideFlags: 0
@@ -367,8 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3f24d9ac061e14cb1897aa71f6b7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alias: Button2
-  _tag: 0
+  _alias: 
   _status: 2
   _onClicks:
   - type: 1
@@ -550,7 +547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: FirstScreen
-  _tag: 0
   _status: 0
   _beforeOpen:
     m_PersistentCalls:
@@ -632,7 +628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: a3
-  _tag: 0
 --- !u!4 &634805194
 Transform:
   m_ObjectHideFlags: 0
@@ -878,7 +873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: Button1
-  _tag: 0
   _status: 2
   _onClicks:
   - type: 2
@@ -1567,7 +1561,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: a1
-  _tag: 0
 --- !u!4 &1552173812
 Transform:
   m_ObjectHideFlags: 0
@@ -1613,7 +1606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: a4
-  _tag: 0
 --- !u!4 &1595618491
 Transform:
   m_ObjectHideFlags: 0

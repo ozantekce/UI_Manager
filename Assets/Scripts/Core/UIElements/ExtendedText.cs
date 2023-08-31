@@ -8,7 +8,6 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
 {
 
     [SerializeField] private string _alias;
-    [SerializeField] private AliasEntityTag _tag;
     [SerializeField] private UIElementStatus _status;
 
     private I_UI_Element _parent;
@@ -69,7 +68,6 @@ public class ExtendedText : MonoBehaviour, I_UI_Element
     public UnityEvent AfterClose { get { return _afterClose; } set { _afterClose = value; } }
 
     public string Alias { get => _alias; set => _alias = value; }
-    public AliasEntityTag Tag { get => _tag; set => _tag = value; }
 
     public UIElementType ElementType => UIElementType.Text;
 

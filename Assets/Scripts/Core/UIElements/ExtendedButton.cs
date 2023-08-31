@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class ExtendedButton : MonoBehaviour, I_UI_Element
 {
     [SerializeField] private string _alias;
-    [SerializeField] private AliasEntityTag _tag;
     [SerializeField] private UIElementStatus _status;
 
 
@@ -191,8 +190,6 @@ public class ExtendedButton : MonoBehaviour, I_UI_Element
     public UnityEvent AfterClose { get { return _afterClose; } set { _afterClose = value; } }
 
     public string Alias { get => _alias; set => _alias = value; }
-    public AliasEntityTag Tag { get => _tag; set => _tag = value; }
-
     public UIElementType ElementType => UIElementType.Button;
 
     public I_UI_Element Parent { get => _parent; set => _parent = value; }

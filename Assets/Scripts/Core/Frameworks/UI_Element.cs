@@ -8,7 +8,9 @@ public class UI_Element : MonoBehaviour, IAliasEntity
 {
 
     [SerializeField] private string _alias;
+    [SerializeField] private UIElementType _type = UIElementType.None;
     [SerializeField] private UIElementStatus _status;
+    
 
     private UI_Element _parent;
     private List<UI_Element> _childs;
@@ -130,7 +132,7 @@ public class UI_Element : MonoBehaviour, IAliasEntity
 
 
     #region GetterSetter
-    public virtual UIElementType ElementType => UIElementType.None;
+    public virtual UIElementType ElementType => _type;
 
     public UIElementStatus Status { get => _status; set => _status = value; }
     public UnityEvent BeforeOpen { get { return _beforeOpen; } set { _beforeOpen = value; } }

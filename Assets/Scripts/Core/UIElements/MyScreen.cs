@@ -20,7 +20,7 @@ public class MyScreen : UI_Element
 
 
 
-    public override UIElementType ElementType => UIElementType.Screen;
+    //public override UIElementType ElementType => UIElementType.Screen;
 
 
 }

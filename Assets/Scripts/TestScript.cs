@@ -8,9 +8,6 @@ public class TestScript : MonoBehaviour
     void Start()
     {
 
-        string a =  "a1".GetEntity<Deneme>().Alias;
-
-        Debug.Log(a);
     }
 
     // Update is called once per frame

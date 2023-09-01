@@ -48,7 +48,7 @@ public class ExtendedButton : Interactable_UI_Element
     }
 
 
-    public override UIElementType ElementType => UIElementType.Button;
+    //public override UIElementType ElementType => UIElementType.Button;
 
 
     [System.Serializable]

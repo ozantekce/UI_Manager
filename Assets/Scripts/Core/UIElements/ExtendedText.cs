@@ -61,7 +61,7 @@ public class ExtendedText : UI_Element
 
     public TextMethod TextMethod { get => textMethod; set => textMethod = value; }
 
-    public override UIElementType ElementType => UIElementType.Text;
+    //public override UIElementType ElementType => UIElementType.Text;
 
     #endregion
 

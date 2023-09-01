@@ -10,6 +10,8 @@ public class FadeAnimation : UI_Animation
 
 
     public float duration;
+    public bool startFadeIsCurrentFade;
+    [HideInInspectorIf("startFadeIsCurrentFade")]
     public float fadeStart;
     public float fadeEnd;
     public bool  withChilds;
@@ -28,36 +30,46 @@ public class FadeAnimation : UI_Animation
         }
 
 
-        Color c = image.color;
-        c.a = fadeStart;
-        image.color = c;
+        Color currentColor = image.color;
+        
+        if(!startFadeIsCurrentFade)
+        {
+            currentColor.a = fadeStart;
+        }
+
+        image.color = currentColor;
 
         if(childs != null )
         {
             foreach (Image childImage in childs)
             {
-                Color cc = childImage.color;
-                cc.a = fadeStart;
-                childImage.color = cc;
+                Color childCurrentColor = childImage.color;
+                
+                if (!startFadeIsCurrentFade)
+                {
+                    childCurrentColor.a = fadeStart;
+                }
+
+                childImage.color = childCurrentColor;
             }
         }
 
         float timer = 0;
-        float deltaFade = (fadeEnd - fadeStart)/duration;
+        float deltaFade = (fadeEnd - currentColor.a)/duration;
         while (timer<duration)
         {
             float deltaTime = Time.deltaTime;
             timer += deltaTime;
 
-            c.a += deltaTime * deltaFade;
-            image.color = c;
+            currentColor.a += deltaTime * deltaFade;
+            image.color = currentColor;
 
             if (childs != null)
             {
                 foreach (Image childImage in childs)
                 {
                     Color cc = childImage.color;
-                    cc.a = c.a;
+                    cc.a = currentColor.a;
                     childImage.color = cc;
                 }
             }

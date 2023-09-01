@@ -194,6 +194,8 @@ MonoBehaviour:
   textType: 1
   textMeshPro: {fileID: 21739982}
   unityText: {fileID: 0}
+  dontUpdateText: 0
+  updateRate: 0
 --- !u!114 &21739982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31.470093, y: -5.245117}
+  m_AnchoredPosition: {x: -31.470093, y: 0}
   m_SizeDelta: {x: -576.9519, y: -377.6413}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614366677

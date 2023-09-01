@@ -16,21 +16,16 @@ public class ExtendedText : UI_Element
 
     private TextMethod textMethod;
 
-    private void Update()
-    {
-        
-        if(TextMethod != null)
-        {
-            Text = TextMethod.Invoke();
-        }
+    public bool dontUpdateText;
+    [HideInInspectorIf("dontUpdateText")]
+    public float updateRate;
 
-    }
-
-
+    private CooldownDynamic _updateCD;
 
     public override void ConfigurationsAwake()
     {
         base.ConfigurationsAwake();
+        _updateCD = new CooldownDynamic();
     }
 
     public override void ConfigurationsStart()
@@ -40,10 +35,31 @@ public class ExtendedText : UI_Element
     }
 
 
+    private void Update()
+    {
+
+        if (!dontUpdateText && TextMethod != null && _updateCD.Ready(updateRate))
+        {
+            UpdateText();
+        }
+
+    }
+
+
+    public void UpdateText()
+    {
+        Text = TextMethod.Invoke();
+    }
+
+
+
+
+
 
     #region GetterSetter
 
-    public string Text { 
+    public string Text
+    {
         get
         {
             if (textType == ExtendedTextType.TextMeshPro) return textMeshPro.text;
@@ -56,7 +72,7 @@ public class ExtendedText : UI_Element
             else if (textType == ExtendedTextType.UnityText) unityText.text = value;
 
         }
-    
+
     }
 
     public TextMethod TextMethod { get => textMethod; set => textMethod = value; }

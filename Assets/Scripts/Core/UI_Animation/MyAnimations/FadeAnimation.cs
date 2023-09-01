@@ -14,17 +14,17 @@ public class FadeAnimation : UI_Animation
     public float fadeEnd;
     public bool  withChilds;
 
-    public override IEnumerator Enumerator(I_UI_Element element)
+    public override IEnumerator Enumerator(UI_Element element)
     {
 
-        element.MonoBehaviour.gameObject.SetActive(true);
-        Image image = element.MonoBehaviour.GetComponent<Image>();
+        element.gameObject.SetActive(true);
+        Image image = element.GetComponent<Image>();
 
 
         Image[] childs = null;
         if (withChilds)
         {
-            childs = element.MonoBehaviour.GetComponentsInChildren<Image>();
+            childs = element.GetComponentsInChildren<Image>();
         }
 
 

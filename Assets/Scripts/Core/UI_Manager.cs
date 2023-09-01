@@ -10,11 +10,11 @@ public class UI_Manager : MonoBehaviour
     private static UI_Manager s_Instance;
 
 
-    [SerializeField, InterfaceType(typeof(I_UI_Element))]
+    [SerializeField, InterfaceType(typeof(UI_Element))]
     private MonoBehaviour[] _uiElements;
 
 
-    private Dictionary<UIElementType, List<I_UI_Element>> _typeElements;
+    private Dictionary<UIElementType, List<UI_Element>> _typeElements;
 
 
     private Heap<Command> _commands;
@@ -31,15 +31,15 @@ public class UI_Manager : MonoBehaviour
         }
         MakeSingleton();
 
-        _typeElements = new Dictionary<UIElementType, List<I_UI_Element>>();
+        _typeElements = new Dictionary<UIElementType, List<UI_Element>>();
         _commands = new Heap<Command>();
 
         FindAllUIElements();
 
         foreach (MonoBehaviour uiElement in _uiElements)
         {
-            I_UI_Element ie = uiElement as I_UI_Element;
-            List<I_UI_Element> temp = _typeElements.GetValueOrDefault(ie.ElementType, new List<I_UI_Element>());
+            UI_Element ie = uiElement as UI_Element;
+            List<UI_Element> temp = _typeElements.GetValueOrDefault(ie.ElementType, new List<UI_Element>());
             temp.Add(ie);
             _typeElements[ie.ElementType] = temp;
 
@@ -56,7 +56,7 @@ public class UI_Manager : MonoBehaviour
     {
         foreach (MonoBehaviour uiElement in _uiElements)
         {
-            I_UI_Element ie = uiElement as I_UI_Element;
+            UI_Element ie = uiElement as UI_Element;
             ie.ConfigurationsStart();
         }
 
@@ -97,7 +97,7 @@ public class UI_Manager : MonoBehaviour
             MonoBehaviour[] subs = rootGameObject.GetComponentsInChildren<MonoBehaviour>(true);
             foreach (MonoBehaviour entity in subs)
             {
-                if (entity is I_UI_Element)
+                if (entity is UI_Element)
                 {
                     allEntities.Add(entity);
                 }
@@ -117,29 +117,29 @@ public class UI_Manager : MonoBehaviour
         AddCommand(new LoadSceneCommand(sceneName, delay));
     }
 
-    public void OpenUIElement(I_UI_Element element) { OpenUIElement(element, 0); }
-    public void OpenUIElement(I_UI_Element element, float delay = 0){ AddCommand(new OpenUIElementCommand(element, delay)); }
+    public void OpenUIElement(UI_Element element) { OpenUIElement(element, 0); }
+    public void OpenUIElement(UI_Element element, float delay = 0){ AddCommand(new OpenUIElementCommand(element, delay)); }
 
-    public void CloseUIElement(I_UI_Element element) { CloseUIElement(element, 0f); }
-    public void CloseUIElement(I_UI_Element element, float delay) { AddCommand(new CloseUIElementCommand(element, delay)); }
+    public void CloseUIElement(UI_Element element) { CloseUIElement(element, 0f); }
+    public void CloseUIElement(UI_Element element, float delay) { AddCommand(new CloseUIElementCommand(element, delay)); }
 
-    public void ForceOpenUIElement(I_UI_Element element)
+    public void ForceOpenUIElement(UI_Element element)
     {
         element.Status = UIElementStatus.Opened;
-        element.MonoBehaviour.gameObject.SetActive(true);
+        element.gameObject.SetActive(true);
     }
 
-    public void ForceCloseUIElement(I_UI_Element element)
+    public void ForceCloseUIElement(UI_Element element)
     {
         element.Status = UIElementStatus.Closed;
-        element.MonoBehaviour.gameObject.SetActive(true);
+        element.gameObject.SetActive(true);
     }
 
     public void CloseAllUIElements(UIElementType type,float delay = 0)
     {
-        if(_typeElements.TryGetValue(type, out List<I_UI_Element> elements))
+        if(_typeElements.TryGetValue(type, out List<UI_Element> elements))
         {
-            foreach (I_UI_Element e in elements)
+            foreach (UI_Element e in elements)
             {
                 CloseUIElement(e,delay);
             }
@@ -164,9 +164,9 @@ public class UI_Manager : MonoBehaviour
 
     #region GetterSetter
 
-    public bool TryGetElements(UIElementType elementType, out List<I_UI_Element> elements)
+    public bool TryGetElements(UIElementType elementType, out List<UI_Element> elements)
     {
-        if (_typeElements.TryGetValue(elementType, out List<I_UI_Element> list))
+        if (_typeElements.TryGetValue(elementType, out List<UI_Element> list))
         {
             elements = list;
             return true;
@@ -189,14 +189,14 @@ public class UI_Manager : MonoBehaviour
     private abstract class Command : IComparable<Command>
     {
 
-        protected I_UI_Element _element;
+        protected UI_Element _element;
         private float _delay;
         private bool _waitUntilTerminated;
 
         private bool _isTerminated;
         private float _createTime;
         private List<Command> _subCommands = new List<Command>();
-        public Command(I_UI_Element element, float delay = 0)
+        public Command(UI_Element element, float delay = 0)
         {
             this._element = element;
             this._createTime = Time.time;
@@ -241,7 +241,7 @@ public class UI_Manager : MonoBehaviour
 
     private class OpenUIElementCommand : Command
     {
-        public OpenUIElementCommand(I_UI_Element element, float delay = 0) : base(element, delay)
+        public OpenUIElementCommand(UI_Element element, float delay = 0) : base(element, delay)
         {
         }
 
@@ -267,7 +267,7 @@ public class UI_Manager : MonoBehaviour
 
     private class CloseUIElementCommand : Command
     {
-        public CloseUIElementCommand(I_UI_Element element, float delay = 0) : base(element, delay)
+        public CloseUIElementCommand(UI_Element element, float delay = 0) : base(element, delay)
         {
         }
 
@@ -331,22 +331,22 @@ public static class UI_ManagerExtensions
 
     public static void OpenUIElement(this string alias, float delay = 0)
     {
-        I_UI_Element element = alias.GetEntity<I_UI_Element>();
+        UI_Element element = alias.GetEntity<UI_Element>();
         UI_Manager.Instance.OpenUIElement(element, delay);
     }
 
-    public static void OpenUIElement(this I_UI_Element element, float delay = 0)
+    public static void OpenUIElement(this UI_Element element, float delay = 0)
     {
         UI_Manager.Instance.OpenUIElement(element, delay);
     }
 
     public static void CloseUIElement(this string alias, float delay = 0)
     {
-        I_UI_Element element = alias.GetEntity<I_UI_Element>();
+        UI_Element element = alias.GetEntity<UI_Element>();
         UI_Manager.Instance.CloseUIElement(element, delay);
     }
 
-    public static void CloseUIElement(this I_UI_Element element, float delay = 0)
+    public static void CloseUIElement(this UI_Element element, float delay = 0)
     {
         UI_Manager.Instance.CloseUIElement(element, delay);
     }

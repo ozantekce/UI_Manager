@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class UI_Animation : ScriptableObject
 {
-    public abstract IEnumerator Enumerator(I_UI_Element element);
+    public abstract IEnumerator Enumerator(UI_Element element);
 
 }

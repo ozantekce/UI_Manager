@@ -10,12 +10,12 @@ public class UnityAnimation : UI_Animation
     [SerializeField]
     private AnimationClip clip;
 
-    private static Dictionary<I_UI_Element, Animation> keyValuePairs;
+    private static Dictionary<UI_Element, Animation> keyValuePairs;
 
     private Animation animation;
 
     private WaitForEndOfFrame waitForEndOfFrame;
-    public override IEnumerator Enumerator(I_UI_Element element)
+    public override IEnumerator Enumerator(UI_Element element)
     {
 
         if (clip == null) yield break;
@@ -24,13 +24,13 @@ public class UnityAnimation : UI_Animation
 
         if (keyValuePairs == null)
         {
-            keyValuePairs = new Dictionary<I_UI_Element, Animation>();
+            keyValuePairs = new Dictionary<UI_Element, Animation>();
         }
         if (!keyValuePairs.ContainsKey(element))
         {
-            Animation animation = element.MonoBehaviour.gameObject.GetComponent<Animation>();
+            Animation animation = element.gameObject.GetComponent<Animation>();
             if (animation == null)
-                animation = element.MonoBehaviour.gameObject.AddComponent<Animation>();
+                animation = element.gameObject.AddComponent<Animation>();
             keyValuePairs.Add(element, animation);
         }
 
@@ -39,7 +39,7 @@ public class UnityAnimation : UI_Animation
         {
             animation.AddClip(clip, clip.name);
         }
-        element.MonoBehaviour.gameObject.SetActive(true);
+        element.gameObject.SetActive(true);
         animation.Play(clip.name);
 
         yield return waitForEndOfFrame;

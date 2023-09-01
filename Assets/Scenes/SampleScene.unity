@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 437289970}
   - component: {fileID: 437289969}
   - component: {fileID: 437289968}
+  - component: {fileID: 437289973}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -369,16 +370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alias: 
   _status: 2
-  _onClicks:
-  - type: 1
-    elementAlias: 
-    element: {fileID: 1061514308}
-    sceneName: 
-    waitToExecute: 0
-    waitToReuse: 0
-    onClickEvent:
-      m_PersistentCalls:
-        m_Calls: []
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -393,6 +384,27 @@ MonoBehaviour:
       m_Calls: []
   _openAnimation: {fileID: 0}
   _closeAnimation: {fileID: 0}
+  _interactableDatas:
+  - eventTriggerType: 0
+    animation: {fileID: 11400000, guid: de1d9e50428944944a7946cdee61d7b9, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventTriggerType: 1
+    animation: {fileID: 11400000, guid: 7ac76e096d6fe12418275b76384c3288, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onClicks:
+  - type: 1
+    elementAlias: 
+    element: {fileID: 1061514308}
+    sceneName: 
+    waitToExecute: 0
+    waitToReuse: 0
+    onClickEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &437289969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +508,19 @@ RectTransform:
   m_AnchoredPosition: {x: 88, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &437289973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437289967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &511367458
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +638,7 @@ GameObject:
   - component: {fileID: 614366679}
   - component: {fileID: 614366678}
   - component: {fileID: 614366677}
+  - component: {fileID: 614366680}
   m_Layer: 5
   m_Name: FirstScreen
   m_TagString: Untagged
@@ -641,8 +667,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -31.470093, y: -5.245117}
+  m_SizeDelta: {x: -576.9519, y: -377.6413}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614366677
 MonoBehaviour:
@@ -710,6 +736,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614366675}
   m_CullTransparentMesh: 1
+--- !u!114 &614366680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614366675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &634805192
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +909,7 @@ GameObject:
   - component: {fileID: 782203396}
   - component: {fileID: 782203395}
   - component: {fileID: 782203398}
+  - component: {fileID: 782203399}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -986,16 +1034,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alias: Button1
   _status: 2
-  _onClicks:
-  - type: 2
-    elementAlias: 
-    element: {fileID: 1061514308}
-    sceneName: 
-    waitToExecute: 0
-    waitToReuse: 0
-    onClickEvent:
-      m_PersistentCalls:
-        m_Calls: []
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -1010,6 +1048,30 @@ MonoBehaviour:
       m_Calls: []
   _openAnimation: {fileID: 0}
   _closeAnimation: {fileID: 0}
+  _interactableDatas: []
+  _onClicks:
+  - type: 2
+    elementAlias: 
+    element: {fileID: 1061514308}
+    sceneName: 
+    waitToExecute: 0
+    waitToReuse: 0
+    onClickEvent:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &782203399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782203393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &822324885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1104,7 @@ MonoBehaviour:
   _uiElements:
   - {fileID: 614366677}
   - {fileID: 21739981}
-  - {fileID: 782203398}
+  - {fileID: 0}
   - {fileID: 437289968}
 --- !u!4 &822324887
 Transform:
@@ -1255,7 +1317,7 @@ MonoBehaviour:
   - {fileID: 1595618490}
   - {fileID: 614366677}
   - {fileID: 21739981}
-  - {fileID: 782203398}
+  - {fileID: 0}
   - {fileID: 437289968}
 --- !u!4 &1005944249
 Transform:

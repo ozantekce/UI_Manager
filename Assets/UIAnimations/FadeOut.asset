@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FadeOut
   m_EditorClassIdentifier: 
   duration: 0.3
+  startFadeIsCurrentFade: 1
   fadeStart: 1
   fadeEnd: 0
   withChilds: 1

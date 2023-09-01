@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d0c32047979fe48995f145135b0d12, type: 3}
   m_Name: ScaleUp
   m_EditorClassIdentifier: 
-  duration: 0
-  startScale: {x: 0, y: 0, z: 0}
-  endScale: {x: 0, y: 0, z: 0}
+  duration: 0.3
+  startScaleIsCurrentScale: 1
+  startScale: {x: 0.5, y: 0.5, z: 0.5}
+  endScale: {x: 1.5, y: 1.5, z: 1.5}

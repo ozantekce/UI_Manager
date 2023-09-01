@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &21739980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: Text1
+  _type: 0
   _status: 2
   _beforeOpen:
     m_PersistentCalls:
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: 
+  _type: 0
   _status: 2
   _beforeOpen:
     m_PersistentCalls:
@@ -573,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: 
+  _type: 0
   _status: 0
   _beforeOpen:
     m_PersistentCalls:
@@ -683,6 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: FirstScreen
+  _type: 0
   _status: 0
   _beforeOpen:
     m_PersistentCalls:
@@ -1033,6 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: Button1
+  _type: 0
   _status: 2
   _beforeOpen:
     m_PersistentCalls:
@@ -1048,7 +1053,17 @@ MonoBehaviour:
       m_Calls: []
   _openAnimation: {fileID: 0}
   _closeAnimation: {fileID: 0}
-  _interactableDatas: []
+  _interactableDatas:
+  - eventTriggerType: 0
+    animation: {fileID: 11400000, guid: 8ecd5264147ceba4f83e03d68f6bb90d, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventTriggerType: 1
+    animation: {fileID: 11400000, guid: 0c0ff39032fb3f64c8f46662e4766ccf, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
   _onClicks:
   - type: 2
     elementAlias: 
@@ -1104,8 +1119,11 @@ MonoBehaviour:
   _uiElements:
   - {fileID: 614366677}
   - {fileID: 21739981}
-  - {fileID: 0}
+  - {fileID: 782203398}
   - {fileID: 437289968}
+  - {fileID: 1061514308}
+  - {fileID: 2127121459}
+  - {fileID: 511367460}
 --- !u!4 &822324887
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,8 +1335,11 @@ MonoBehaviour:
   - {fileID: 1595618490}
   - {fileID: 614366677}
   - {fileID: 21739981}
-  - {fileID: 0}
+  - {fileID: 782203398}
   - {fileID: 437289968}
+  - {fileID: 1061514308}
+  - {fileID: 2127121459}
+  - {fileID: 511367460}
 --- !u!4 &1005944249
 Transform:
   m_ObjectHideFlags: 0
@@ -1426,6 +1447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: 
+  _type: 1
   _status: 0
   _beforeOpen:
     m_PersistentCalls:
@@ -2000,6 +2022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alias: 
+  _type: 0
   _status: 0
   _beforeOpen:
     m_PersistentCalls:

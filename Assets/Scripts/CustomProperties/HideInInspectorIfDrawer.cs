@@ -45,7 +45,7 @@ public class HideInInspectorIfDrawer : PropertyDrawer
 public class HideInInspectorIf : PropertyAttribute
 {
     public string condition;
-    public string parentPath; // Add this
+    public string parentPath;
 
     public HideInInspectorIf(string condition, string parentPath = "")
     {

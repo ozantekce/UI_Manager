@@ -1,84 +1,57 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Fade", menuName = "ScreenManagerAnimation/Fade")]
 
-public class FadeAnimation : UI_Animation
+namespace UI_Manager
 {
 
+    [CreateAssetMenu(fileName = "Fade", menuName = "UIManagerAnimation/Fade")]
 
-    public float duration;
-    public bool startFadeIsCurrentFade;
-    [HideInInspectorIf("startFadeIsCurrentFade")]
-    public float fadeStart;
-    public float fadeEnd;
-    public bool  withChilds;
-
-    public override IEnumerator Enumerator(UI_Element element)
+    public class FadeAnimation : UI_Animation
     {
 
-        element.gameObject.SetActive(true);
-        Image image = element.GetComponent<Image>();
+
+        public float duration;
+        public bool startFadeIsCurrentFade;
+        [HideInInspectorIf("startFadeIsCurrentFade")]
+        public float fadeStart;
+        public float fadeEnd;
 
 
-        Image[] childs = null;
-        if (withChilds)
+        public override IEnumerator Enumerator(UI_Element element)
         {
-            childs = element.GetComponentsInChildren<Image>();
-        }
 
-
-        Color currentColor = image.color;
-        
-        if(!startFadeIsCurrentFade)
-        {
-            currentColor.a = fadeStart;
-        }
-
-        image.color = currentColor;
-
-        if(childs != null )
-        {
-            foreach (Image childImage in childs)
+            element.gameObject.SetActive(true);
+            CanvasGroup canvasGroup = element.gameObject.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
             {
-                Color childCurrentColor = childImage.color;
-                
-                if (!startFadeIsCurrentFade)
-                {
-                    childCurrentColor.a = fadeStart;
-                }
-
-                childImage.color = childCurrentColor;
-            }
-        }
-
-        float timer = 0;
-        float deltaFade = (fadeEnd - currentColor.a)/duration;
-        while (timer<duration)
-        {
-            float deltaTime = Time.deltaTime;
-            timer += deltaTime;
-
-            currentColor.a += deltaTime * deltaFade;
-            image.color = currentColor;
-
-            if (childs != null)
-            {
-                foreach (Image childImage in childs)
-                {
-                    Color cc = childImage.color;
-                    cc.a = currentColor.a;
-                    childImage.color = cc;
-                }
+                canvasGroup = element.gameObject.AddComponent<CanvasGroup>();
             }
 
 
-            yield return null;
+            float currentAlpha = canvasGroup.alpha;
+            if (!startFadeIsCurrentFade) currentAlpha = fadeStart;
+            canvasGroup.alpha = currentAlpha;
+
+            float timer = 0;
+            float deltaFade = (fadeEnd - currentAlpha) / duration;
+            while (timer < duration)
+            {
+                float deltaTime = Time.deltaTime;
+                timer += deltaTime;
+
+                currentAlpha += deltaTime * deltaFade;
+                canvasGroup.alpha = currentAlpha;
+
+                yield return null;
+            }
+
         }
+
 
     }
 
 
 }
+
+

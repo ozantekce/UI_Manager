@@ -82,7 +82,10 @@ namespace UI_Manager
             base.ConfigurationsStart();
         }
 
-
+        protected override void Update()
+        {
+            base.Update();
+        }
         public EventTrigger EventTrigger { get => _eventTrigger; set => _eventTrigger = value; }
         public InteractableData[] InteractableDatas { get => _interactableDatas; set => _interactableDatas = value; }
     }

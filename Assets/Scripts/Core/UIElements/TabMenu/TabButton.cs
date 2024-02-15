@@ -14,8 +14,8 @@ namespace UI_Manager
         [SerializeField] private TabPanel _panel;
 
 
-        [SerializeField] private UI_Animation _selectedAnimation;
-        [SerializeField] private UI_Animation _nonSelectedAnimation;
+        [SerializeField] private UiAnimationWrapper _selectedAnimation;
+        [SerializeField] private UiAnimationWrapper _nonSelectedAnimation;
 
 
         private void OnClickButton()
@@ -38,12 +38,13 @@ namespace UI_Manager
 
 
 
+
         public override UIElementType Type => UIElementType.TabButton;
 
         public TabPanel Panel { get => _panel; set => _panel = value; }
         public TabMenu Menu { get => _menu; set => _menu = value; }
-        public UI_Animation SelectedAnimation { get => _selectedAnimation; }
-        public UI_Animation NonSelectedAnimation { get => _nonSelectedAnimation; }
+        public UI_Animation SelectedAnimation { get => _selectedAnimation != null ? _selectedAnimation.Animation : null; }
+        public UI_Animation NonSelectedAnimation { get => _nonSelectedAnimation != null ? _nonSelectedAnimation.Animation : null; }
 
     }
 

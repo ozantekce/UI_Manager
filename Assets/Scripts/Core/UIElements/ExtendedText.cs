@@ -44,10 +44,9 @@ namespace UI_Manager
 
         }
 
-
-        private void Update()
+        protected override void Update()
         {
-
+            base.Update();
             if (!dontUpdateText && TextMethod != null && _updateCD.Ready(updateDelay))
             {
                 UpdateText();

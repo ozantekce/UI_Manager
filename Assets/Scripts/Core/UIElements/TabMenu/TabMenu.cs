@@ -26,7 +26,7 @@ namespace UI_Manager
                 _currentTabPanel = _currentTabButton.Panel;
                 _currentTabPanel.transform.SetAsLastSibling();
                 if (_currentTabButton.SelectedAnimation != null) UI_Manager.Instance.StartCoroutine(_currentTabButton.SelectedAnimation.Enumerator(_currentTabButton));
-                _currentTabPanel.Open();
+                _currentTabPanel.Open(0, 0);
             }
         }
 
@@ -37,13 +37,13 @@ namespace UI_Manager
             if (_currentTabButton != null)
             {
                 if (_currentTabButton.NonSelectedAnimation != null) StartCoroutine(_currentTabButton.NonSelectedAnimation.Enumerator(_currentTabButton));
-                _currentTabPanel.Close();
+                _currentTabPanel.Close(0, 0);
             }
             _currentTabButton = tabButton;
             _currentTabPanel = _currentTabButton.Panel;
 
             if (_currentTabButton.SelectedAnimation != null) StartCoroutine(_currentTabButton.SelectedAnimation.Enumerator(_currentTabButton));
-            _currentTabPanel.Open();
+            _currentTabPanel.Open(0, 0);
             return true;
 
         }

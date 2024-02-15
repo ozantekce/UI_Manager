@@ -56,6 +56,10 @@ namespace UI_Manager
 
         }
 
+        protected override void Update()
+        {
+            base.Update();
+        }
 
 
         public override UIElementType Type => UIElementType.Button;
@@ -110,6 +114,8 @@ namespace UI_Manager
             public UI_Element element;
             [ShowInEnum("type", "LoadScene")]
             public string sceneName;
+            [ShowInEnum(nameof(type), nameof(OperationType.OpenElement), nameof(OperationType.CloseElement))]
+            public int animIndex = 0;
 
             public float waitToExecute;
             public float waitToReuse;
@@ -169,12 +175,12 @@ namespace UI_Manager
 
             private static void OpenElement(OnClickData data)
             {
-                data.Element.OpenUIElement(data.waitToExecute);
+                data.Element.OpenUIElement(data.waitToExecute, data.animIndex);
             }
 
             private static void CloseElement(OnClickData data)
             {
-                data.Element.CloseUIElement(data.waitToExecute);
+                data.Element.CloseUIElement(data.waitToExecute, data.animIndex);
             }
 
             private static void QuitApplication(OnClickData data)

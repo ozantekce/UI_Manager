@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 namespace UI_Manager
 {
 
@@ -13,26 +14,23 @@ namespace UI_Manager
         private UIElementType _type = UIElementType.None;
         [SerializeField][ReadOnly] private UIElementStatus _status;
 
-
+        #region Hierarchy
         private UI_Element _parent;
         private List<UI_Element> _childs;
+        #endregion
+
+        #region Events
+        [SerializeField] private UnityEvent _beforeOpen;
+        [SerializeField] private UnityEvent _afterOpen;
+        [SerializeField] private UnityEvent _beforeClose;
+        [SerializeField] private UnityEvent _afterClose;
+        #endregion
 
 
+        private RectTransform _rectTransform;
+        private AnimationComponent _animationComponent;
 
-        [SerializeField]
-        private UnityEvent _beforeOpen;
-        [SerializeField]
-        private UnityEvent _afterOpen;
-        [SerializeField]
-        private UnityEvent _beforeClose;
-        [SerializeField]
-        private UnityEvent _afterClose;
-
-        [SerializeField]
-        private UI_Animation _openAnimation;
-        [SerializeField]
-        private UI_Animation _closeAnimation;
-
+        protected ElementInfo? _elementInfo = null;
 
         private bool _configurationsAwake;
         private bool _configurationsStart;
@@ -47,8 +45,8 @@ namespace UI_Manager
                     UI_Manager.Instance.AddElement(this);
                     ConfigurationsAwake();
                 }
-
             }
+
         }
 
         protected virtual void Start()
@@ -60,6 +58,17 @@ namespace UI_Manager
                     ConfigurationsStart();
                 }
 
+            }
+
+        }
+
+
+        protected virtual void Update()
+        {
+            if(_elementInfo == null)
+            {
+                ElementInfo info = new ElementInfo(this);
+                _elementInfo = info;
             }
         }
 
@@ -73,9 +82,32 @@ namespace UI_Manager
         public virtual void ConfigurationsAwake()
         {
             _configurationsAwake = true;
+
+            BuildHierarchy();
+            _animationComponent = GetComponent<AnimationComponent>();
+
+            if (gameObject.activeSelf)
+            {
+                Status = UIElementStatus.Opened;
+                if(AnimationComponent!=null) StartCoroutine(AnimationComponent.PlayAnimation(this, AnimationExecuteTime.Idle, 0));
+            }
+            else
+            {
+                Status = UIElementStatus.Closed;
+            }
+
+
+
+        }
+
+
+        private void BuildHierarchy()
+        {
+            // find parent
             Transform parentTransform = transform.parent;
             if (parentTransform != null) Parent = parentTransform.GetComponent<UI_Element>();
 
+            // find children
             Childs = new List<UI_Element>();
             foreach (Transform child in transform)
             {
@@ -84,23 +116,14 @@ namespace UI_Manager
                     Childs.Add(c);
                 }
             }
-
-            if (gameObject.activeSelf)
-            {
-                Status = UIElementStatus.Opened;
-            }
-            else
-            {
-                Status = UIElementStatus.Closed;
-            }
-
-
         }
+
 
         public virtual void ConfigurationsStart()
         {
             _configurationsStart = true;
         }
+
 
 
 
@@ -111,16 +134,16 @@ namespace UI_Manager
         }
 
 
-        public void Open(float delay = 0)
+        public void Open(float delay = 0, int animIndex = 0)
         {
             if (delay <= 0)
-                UI_Manager.Instance.StartCoroutine(OpenRoutine());
+                UI_Manager.Instance.StartCoroutine(OpenRoutine(animIndex));
             else
-                UI_Manager.Instance.OpenUIElement(this, delay);
+                UI_Manager.Instance.OpenUIElement(this, delay, animIndex);
         }
 
 
-        private IEnumerator OpenRoutine()
+        private IEnumerator OpenRoutine(int animIndex = 0)
         {
             transform.SetAsLastSibling();
             // must be closed
@@ -129,12 +152,15 @@ namespace UI_Manager
             Status = UIElementStatus.Opening;
             BeforeOpen?.Invoke();
 
-            if (OpenAnimation != null) yield return OpenAnimation.Enumerator(this);
+            if (AnimationComponent != null) yield return AnimationComponent.PlayAnimation(this, AnimationExecuteTime.Open, animIndex);
 
             if (Status != UIElementStatus.Opening) yield break;
             OpenNow();
 
             AfterOpen?.Invoke();
+
+            if (AnimationComponent != null) StartCoroutine(AnimationComponent.PlayAnimation(this, AnimationExecuteTime.Idle, 0));
+
         }
 
 
@@ -147,17 +173,17 @@ namespace UI_Manager
         }
 
 
-        public void Close(float delay = 0)
+        public void Close(float delay = 0, int animIndex = 0)
         {
             if (delay <= 0)
-                UI_Manager.Instance.StartCoroutine(CloseRoutine());
+                UI_Manager.Instance.StartCoroutine(CloseRoutine(animIndex));
             else
-                UI_Manager.Instance.OpenUIElement(this, delay);
+                UI_Manager.Instance.OpenUIElement(this, delay, animIndex);
         }
 
 
 
-        private IEnumerator CloseRoutine()
+        private IEnumerator CloseRoutine(int animIndex = 0)
         {
             // must be opened
             if (Status != UIElementStatus.Opened) yield break;
@@ -165,7 +191,7 @@ namespace UI_Manager
             Status = UIElementStatus.Closing;
             BeforeClose?.Invoke();
 
-            if (CloseAnimation != null) yield return CloseAnimation.Enumerator(this);
+            if (AnimationComponent != null) yield return AnimationComponent.PlayAnimation(this, AnimationExecuteTime.Close, animIndex);
 
             if (Status != UIElementStatus.Closing) yield break;
             CloseNow();
@@ -184,11 +210,13 @@ namespace UI_Manager
 
         public void ForceOpen()
         {
+            AnimationComponent.KillActiveAnimation();
             UI_Manager.Instance.ForceOpenUIElement(this);
         }
 
         public void ForceClose()
         {
+            AnimationComponent.KillActiveAnimation();
             UI_Manager.Instance.ForceCloseUIElement(this);
         }
 
@@ -210,8 +238,10 @@ namespace UI_Manager
 
         public List<UI_Element> Childs { get => _childs; set => _childs = value; }
 
-        public UI_Animation OpenAnimation { get => _openAnimation; set => _openAnimation = value; }
-        public UI_Animation CloseAnimation { get => _closeAnimation; set => _closeAnimation = value; }
+
+        public AnimationComponent AnimationComponent { get => _animationComponent; set => _animationComponent = value; }
+        public ElementInfo? ElementInfo { get => _elementInfo; }
+        public RectTransform RectTransform { get => _rectTransform != null ? _rectTransform: _rectTransform = GetComponent<RectTransform>(); }
 
         #endregion
 

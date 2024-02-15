@@ -5,63 +5,53 @@ using UnityEngine;
 namespace UI_Manager
 {
 
-    [CreateAssetMenu(fileName = "UnityAnimation", menuName = "ScreenManagerAnimation/UnityAnimation")]
-
+    [System.Serializable]
     public class UnityAnimation : UI_Animation
     {
 
+        public override UI_AnimationType AnimationType => UI_AnimationType.Unity;
+
         [SerializeField]
-        private AnimationClip clip;
+        private AnimationClip _clip;
 
-        private static Dictionary<UI_Element, Animation> keyValuePairs;
 
-        private Animation animation;
+        private Animation _animation;
 
-        private WaitForEndOfFrame waitForEndOfFrame;
+        private WaitForEndOfFrame _waitForEndOfFrame;
+
+        
+
         public override IEnumerator Enumerator(UI_Element element)
         {
 
-            if (clip == null) yield break;
+            if (_clip == null) yield break;
 
-            clip.legacy = true;
+            _clip.legacy = true;
 
-            if (keyValuePairs == null)
-            {
-                keyValuePairs = new Dictionary<UI_Element, Animation>();
-            }
-            if (!keyValuePairs.ContainsKey(element))
-            {
-                Animation animation = element.gameObject.GetComponent<Animation>();
-                if (animation == null)
-                    animation = element.gameObject.AddComponent<Animation>();
-                keyValuePairs.Add(element, animation);
-            }
+            _animation = element.gameObject.GetComponent<Animation>();
+            if (_animation == null) _animation = element.gameObject.AddComponent<Animation>();
 
-            animation = keyValuePairs[element];
-            if (animation.GetClip(clip.name) == null)
+            if (_animation.GetClip(_clip.name) == null)
             {
-                animation.AddClip(clip, clip.name);
+                _animation.AddClip(_clip, _clip.name);
             }
             element.gameObject.SetActive(true);
-            animation.Play(clip.name);
+            _animation.Play(_clip.name);
 
-            yield return waitForEndOfFrame;
+            yield return _waitForEndOfFrame;
 
-            animation.Play(clip.name);
-            while (animation.IsPlaying(clip.name))
+            _animation.Play(_clip.name);
+            while (_animation.IsPlaying(_clip.name))
             {
-                if (element.Status == UIElementStatus.Opened
-                    || element.Status == UIElementStatus.Closed
-                    )
-                {
-                    animation.Stop();
-                    yield break;
-                }
-                yield return waitForEndOfFrame;
+                yield return _waitForEndOfFrame;
             }
 
         }
 
+        public override void Kill()
+        {
+            _animation.Stop();
+        }
     }
 }
 

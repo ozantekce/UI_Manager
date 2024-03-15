@@ -174,8 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227604d4a5e40214b9298c08baa831eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 2
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -188,8 +190,6 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 0}
-  _closeAnimation: {fileID: 0}
   textType: 1
   textMeshPro: {fileID: 21739982}
   unityText: {fileID: 0}
@@ -325,8 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3f24d9ac061e14cb1897aa71f6b7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
-  _status: 2
+  _status: 0
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -339,18 +341,87 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 0}
-  _closeAnimation: {fileID: 0}
   _findScrollViewInParent: 0
   _scrollView: {fileID: 0}
-  _interactableDatas:
-  - eventTriggerType: 0
-    animation: {fileID: 11400000, guid: de1d9e50428944944a7946cdee61d7b9, type: 2}
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventTriggerType: 1
-    animation: {fileID: 11400000, guid: 7ac76e096d6fe12418275b76384c3288, type: 2}
+  _interactableData:
+  - eventTriggerType: 4
+    animation:
+      animType: 0
+      _tweenAnimation:
+        loopType: 1
+        loopCount: 2
+        sequence:
+        - dataType: 0
+          _moveTweenData:
+            sequenceType: 0
+            loopType: 0
+            loopCount: 0
+            duration: 0.3
+            ease: 1
+            space: 2
+            moveFrom: 0
+            moveTo: 3
+            startPosition: {x: 0, y: 0, z: 0}
+            startTransform: {fileID: 0}
+            startDeltaPosition: {x: 0, y: 0, z: 0}
+            endPosition: {x: 0, y: 20, z: 0}
+            endTransform: {fileID: 0}
+            endDeltaPosition: {x: 0, y: 40, z: 0}
+          _rotateTweenData:
+            sequenceType: 0
+            loopType: 0
+            loopCount: 0
+            duration: 0
+            ease: 0
+            space: 0
+            rotateFrom: 0
+            rotateTo: 0
+            startRotation: {x: 0, y: 0, z: 0}
+            startTransform: {fileID: 0}
+            startDeltaRotation: {x: 0, y: 0, z: 0}
+            endRotation: {x: 0, y: 0, z: 0}
+            endTransform: {fileID: 0}
+            endDeltaRotation: {x: 0, y: 0, z: 0}
+          _scaleTweenData:
+            sequenceType: 0
+            loopType: 0
+            loopCount: 0
+            duration: 0
+            ease: 0
+            scaleFrom: 0
+            scaleTo: 0
+            startScale: {x: 0, y: 0, z: 0}
+            startTransform: {fileID: 0}
+            startDeltaScale: {x: 0, y: 0, z: 0}
+            endScale: {x: 0, y: 0, z: 0}
+            endTransform: {fileID: 0}
+            endDeltaScale: {x: 0, y: 0, z: 0}
+          _colorTweenData:
+            sequenceType: 0
+            loopType: 0
+            loopCount: 0
+            duration: 0
+            ease: 0
+            colorFrom: 0
+            colorTo: 0
+            startSpecificColor: {r: 0, g: 0, b: 0, a: 0}
+            startOtherGraphic: {fileID: 0}
+            endSpecificColor: {r: 0, g: 0, b: 0, a: 0}
+            endOtherGraphic: {fileID: 0}
+          _fadeTweenData:
+            sequenceType: 0
+            loopType: 0
+            loopCount: 0
+            duration: 0
+            ease: 0
+            fadeFrom: 0
+            fadeTo: 0
+            startAlpha: 0
+            startOtherCanvasGroup: {fileID: 0}
+            endAlpha: 0
+            endOtherCanvasGroup: {fileID: 0}
+      _unityAnimation:
+        _clip: {fileID: 0}
     unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -359,6 +430,7 @@ MonoBehaviour:
     elementName: 
     element: {fileID: 1061514308}
     sceneName: 
+    animIndex: 0
     waitToExecute: 0
     waitToReuse: 0
     onClickEvent:
@@ -531,8 +603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e397fd7ab58084a99859e7eb15b55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 0
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -545,8 +619,6 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 11400000, guid: de1d9e50428944944a7946cdee61d7b9, type: 2}
-  _closeAnimation: {fileID: 11400000, guid: 7ac76e096d6fe12418275b76384c3288, type: 2}
 --- !u!114 &511367461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,8 +713,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e397fd7ab58084a99859e7eb15b55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 0
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -655,8 +729,6 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 0}
-  _closeAnimation: {fileID: 0}
 --- !u!114 &614366678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,8 +1018,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3f24d9ac061e14cb1897aa71f6b7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 2
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -960,26 +1034,15 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 0}
-  _closeAnimation: {fileID: 0}
   _findScrollViewInParent: 0
   _scrollView: {fileID: 0}
-  _interactableDatas:
-  - eventTriggerType: 0
-    animation: {fileID: 11400000, guid: 8ecd5264147ceba4f83e03d68f6bb90d, type: 2}
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventTriggerType: 1
-    animation: {fileID: 11400000, guid: 0c0ff39032fb3f64c8f46662e4766ccf, type: 2}
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+  _interactableData: []
   _onClicks:
   - type: 2
     elementName: 
     element: {fileID: 1061514308}
     sceneName: 
+    animIndex: 0
     waitToExecute: 0
     waitToReuse: 0
     onClickEvent:
@@ -1009,7 +1072,7 @@ GameObject:
   - component: {fileID: 822324887}
   - component: {fileID: 822324886}
   m_Layer: 0
-  m_Name: UI_Manager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1090,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c63ccc967a6dbe43a29156624a9c51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _elements: []
+  _elements:
+  - {fileID: 614366677}
+  - {fileID: 21739981}
+  - {fileID: 782203398}
+  - {fileID: 437289968}
+  - {fileID: 1061514308}
+  - {fileID: 2127121459}
+  - {fileID: 511367460}
 --- !u!4 &822324887
 Transform:
   m_ObjectHideFlags: 0
@@ -1294,8 +1364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e397fd7ab58084a99859e7eb15b55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 0
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -1308,8 +1380,6 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 11400000, guid: de1d9e50428944944a7946cdee61d7b9, type: 2}
-  _closeAnimation: {fileID: 11400000, guid: 7ac76e096d6fe12418275b76384c3288, type: 2}
 --- !u!1 &1079764160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,8 +1804,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e397fd7ab58084a99859e7eb15b55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
   _name: 
   _status: 0
+  _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -1748,8 +1820,6 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _openAnimation: {fileID: 11400000, guid: de1d9e50428944944a7946cdee61d7b9, type: 2}
-  _closeAnimation: {fileID: 11400000, guid: 7ac76e096d6fe12418275b76384c3288, type: 2}
 --- !u!114 &2127121460
 MonoBehaviour:
   m_ObjectHideFlags: 0

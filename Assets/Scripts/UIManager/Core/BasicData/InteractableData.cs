@@ -12,7 +12,6 @@ namespace UIManager
         public UIAnimationWrapper animationWrapper;
         public UnityEvent unityEvent;
 
-
     }
 
 }

@@ -12,7 +12,6 @@ namespace UIManager
         public override void ConfigurationsStart()
         {
             base.ConfigurationsStart();
-
         }
 
     }

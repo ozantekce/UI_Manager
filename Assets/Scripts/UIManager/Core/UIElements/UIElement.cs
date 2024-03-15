@@ -12,7 +12,7 @@ namespace UIManager
         [SerializeField] private UIManager _manager;
 
         [SerializeField] private string _name;
-        [SerializeField][ReadOnly] private UIElementStatus _status;
+        [SerializeField, ReadOnly] private UIElementStatus _status;
         [SerializeField] bool _setAsLastSiblingOnOpen = true;
 
         #region Events
@@ -101,9 +101,6 @@ namespace UIManager
         }
 
 
-
-
-        // don't use it on unity's update method
         public virtual void UpdateUI(params object[] parameters)
         {
 

@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public static class TEXT_FORMATS
 {
-
-
 
     private static Dictionary<string, TextFormat> NameToFormat = new Dictionary<string, TextFormat>()
     {
@@ -16,7 +12,7 @@ public static class TEXT_FORMATS
 
     };
 
-    public static string ExecuteFormat(this string formatName,params string[] texts)
+    public static string ExecuteFormat(this string formatName, params string[] texts)
     {
         if (string.IsNullOrEmpty(formatName))
         {
@@ -34,7 +30,7 @@ public static class TEXT_FORMATS
 
     public static void AddFormat(string formatName, string format)
     {
-        NameToFormat.Add(formatName,new TextFormat(format));
+        NameToFormat.Add(formatName, new TextFormat(format));
     }
 
 

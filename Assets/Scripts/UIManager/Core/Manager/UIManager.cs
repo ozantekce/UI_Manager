@@ -41,6 +41,25 @@ namespace UIManager
         }
 
 
+
+        private void Start()
+        {
+            foreach (UIElement uiElement in _elements)
+            {
+                uiElement.ConfigurationsStart();
+            }
+        }
+
+
+        private void OnDestroy()
+        {
+            if (Instance == this)
+            {
+                Instance = null;
+            }
+        }
+
+
         public void FindAndStoreUIElements()
         {
             _elements = FindAllUIElementsInScene();
@@ -66,23 +85,6 @@ namespace UIManager
         }
 
 
-
-        private void OnDestroy()
-        {
-            if(Instance == this)
-            {
-                Instance = null;
-            }
-        }
-
-
-        private void Start()
-        {
-            foreach (UIElement uiElement in _elements)
-            {
-                uiElement.ConfigurationsStart();
-            }
-        }
 
 
         public void AddElement(UIElement uiElement)

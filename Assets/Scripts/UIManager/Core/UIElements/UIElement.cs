@@ -115,6 +115,11 @@ namespace UIManager
                 Manager.OpenUIElement(this, delay, animIndex); // send request to manager
         }
 
+        public void Open()
+        {
+            Open(0, 0);
+        }
+
 
         private IEnumerator OpenRoutine(int animIndex = 0)
         {
@@ -167,6 +172,12 @@ namespace UIManager
             else
                 Manager.OpenUIElement(this, delay, animIndex);
         }
+
+        public void Close()
+        {
+            Close(0, 0);
+        }
+
 
 
         private IEnumerator CloseRoutine(int animIndex = 0)

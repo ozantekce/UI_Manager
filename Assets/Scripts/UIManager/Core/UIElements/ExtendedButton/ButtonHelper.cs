@@ -9,6 +9,7 @@ namespace UIManager
         private static Dictionary<ButtonOperationType, OperationMethod> TypeMethodPairs = new Dictionary<ButtonOperationType, OperationMethod>() 
         {
             {ButtonOperationType.None ,               None },
+            {ButtonOperationType.SwapElements ,       SwapElements },
             {ButtonOperationType.OpenElement  ,       OpenElement },
             {ButtonOperationType.CloseElement ,       CloseElement },
             {ButtonOperationType.QuitApplication ,    QuitApplication },
@@ -22,6 +23,11 @@ namespace UIManager
             data.onClickEvent?.Invoke();
             data.NextClickTime = Time.time + data.waitToReuse;
             TypeMethodPairs[data.type](data);
+        }
+
+        private static void SwapElements(OnClickData data)
+        {
+            UIManager.Instance.SwapUIElements(data.openElement, data.openAnimIndex, data.closeElement, data.closeAnimIndex, data.waitToExecute);
         }
 
 

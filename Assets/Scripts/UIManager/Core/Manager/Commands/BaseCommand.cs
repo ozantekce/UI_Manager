@@ -59,6 +59,7 @@ namespace UIManager
         public bool WaitUntilTerminated { get => _waitUntilTerminated; private set => _waitUntilTerminated = value; }
 
         public int AnimIndex { get => _animIndex; private set => _animIndex = value; }
+        public UIElement Element => _element;
 
         public int CompareTo(BaseCommand other)
         {

@@ -17,6 +17,18 @@ namespace UIManager
         [ShowInEnum(nameof(type), nameof(ButtonOperationType.OpenElement), nameof(ButtonOperationType.CloseElement))]
         public int animIndex = 0;
 
+
+        [ShowInEnum(nameof(type), nameof(ButtonOperationType.SwapElements))]
+        public UIElement openElement;
+        [ShowInEnum(nameof(type), nameof(ButtonOperationType.SwapElements))] 
+        public int openAnimIndex;
+
+        [ShowInEnum(nameof(type), nameof(ButtonOperationType.SwapElements))] 
+        public UIElement closeElement;
+        [ShowInEnum(nameof(type), nameof(ButtonOperationType.SwapElements))] 
+        public int closeAnimIndex;
+
+
         public float waitToExecute;
         public float waitToReuse;
 

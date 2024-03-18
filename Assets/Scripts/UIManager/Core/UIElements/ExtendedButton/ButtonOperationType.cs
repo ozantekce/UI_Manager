@@ -3,11 +3,12 @@ namespace UIManager
 
     public enum ButtonOperationType
     {
-        None,
-        OpenElement,
-        CloseElement,
-        LoadScene,
-        QuitApplication
+        None = 0,
+        SwapElements = 5,
+        OpenElement = 1,
+        CloseElement = 2,
+        LoadScene = 3,
+        QuitApplication = 4
     }
 
 }

@@ -42,6 +42,15 @@ namespace UIManager
         }
 
 
+        public void SwapUIElements(UIElement openElement, int openAnimIndex, UIElement closeElement, int closeAnimIndex, float delay)
+        {
+            OpenElementCommand openCommand = new OpenElementCommand(openElement, 0, openAnimIndex);
+            CloseElementCommand closeCommand = new CloseElementCommand(closeElement, 0, closeAnimIndex);
+            AddCommand(new SwapElementsCommand(openCommand, closeCommand, delay));
+        }
+
+
+
 
         public void OpenUIElement(UIElement element, float delay, int animIndex)
         {

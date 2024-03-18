@@ -10,6 +10,8 @@ namespace UIManager
     public class UIExtendedButton : InteractableUIElement
     {
 
+        public override UIElementType Type => UIElementType.Button;
+
         [SerializeField] private List<OnClickData> _onClicks;
 
         private Button _button;
@@ -53,7 +55,7 @@ namespace UIManager
         }
 
 
-        public override UIElementType Type => UIElementType.Button;
+        
 
         public Button Button => _button != null ? _button : (_button = gameObject.GetOrAddComponent<Button>());
 

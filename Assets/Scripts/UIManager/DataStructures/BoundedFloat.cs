@@ -1,30 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public struct BoundedFloat
+namespace UIManager
 {
-
-    [SerializeField] private float _min;
-    [SerializeField] private float _max;
-    [SerializeField] private float _value;
-
-    public float Min { get => _min; set => _min = value; }
-    public float Max { get => _max; set => _max = value; }
-    public float Value
+    [System.Serializable]
+    public struct BoundedFloat
     {
-        get => _value;
-        set
+
+        [field: SerializeField] public float Min { get; set; }
+        [field: SerializeField] public float Max { get; set; }
+
+        [SerializeField] private float _value;
+
+        public float Value
         {
-            float tempValue = value;
-            if (tempValue < _min) return;
-            if (tempValue > _max) return;
-            _value = tempValue;
+            get => _value;
+            set
+            {
+                float tempValue = value;
+                if (tempValue < Min) return;
+                if (tempValue > Max) return;
+                _value = tempValue;
+            }
         }
+
     }
 
 
-
 }
+

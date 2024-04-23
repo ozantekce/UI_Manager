@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace UIManager
 {
@@ -29,10 +30,29 @@ namespace UIManager
                 element.gameObject.SetActive(true);
             }
 
-            while(element.ElementInfo == null)
+            if(element.ElementInfo == null)
             {
-                yield return null;
+                float oldAlpha;
+                CanvasGroup canvasGroup = element.GetComponent<CanvasGroup>();
+                if (canvasGroup == null)
+                {
+                    canvasGroup = element.gameObject.AddComponent<CanvasGroup>();
+                }
+                oldAlpha = canvasGroup.alpha;
+                while (true)
+                {
+                    canvasGroup.alpha = 0;
+                    yield return null;
+                    if(element.ElementInfo != null)
+                    {
+                        canvasGroup.alpha = oldAlpha;
+                        break;
+                    }
+                }
+
             }
+
+
 
             ConvertSequence(element);
 

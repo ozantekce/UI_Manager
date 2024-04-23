@@ -171,12 +171,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 21739979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 227604d4a5e40214b9298c08baa831eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c9edb63019ecbc4fabe12baadb44da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 0}
   _name: 
-  _status: 2
+  _status: 0
   _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
@@ -191,10 +191,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   textType: 1
-  textMeshPro: {fileID: 21739982}
-  unityText: {fileID: 0}
-  dontUpdateText: 0
-  updateDelay: 0.2
+  _textMeshPro: {fileID: 21739982}
+  _unityText: {fileID: 0}
+  _updateDelay: 0.2
 --- !u!114 &21739982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +321,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 437289967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca3f24d9ac061e14cb1897aa71f6b7af, type: 3}
+  m_Script: {fileID: 11500000, guid: ff6bef79af3cad74391d403f5640ee7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 0}
@@ -341,101 +340,11 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _findScrollViewInParent: 0
-  _scrollView: {fileID: 0}
-  _interactableData:
-  - eventTriggerType: 4
-    animation:
-      animType: 0
-      _tweenAnimation:
-        loopType: 1
-        loopCount: 2
-        sequence:
-        - dataType: 0
-          _moveTweenData:
-            sequenceType: 0
-            loopType: 0
-            loopCount: 0
-            duration: 0.3
-            ease: 1
-            space: 2
-            moveFrom: 0
-            moveTo: 3
-            startPosition: {x: 0, y: 0, z: 0}
-            startTransform: {fileID: 0}
-            startDeltaPosition: {x: 0, y: 0, z: 0}
-            endPosition: {x: 0, y: 20, z: 0}
-            endTransform: {fileID: 0}
-            endDeltaPosition: {x: 0, y: 40, z: 0}
-          _rotateTweenData:
-            sequenceType: 0
-            loopType: 0
-            loopCount: 0
-            duration: 0
-            ease: 0
-            space: 0
-            rotateFrom: 0
-            rotateTo: 0
-            startRotation: {x: 0, y: 0, z: 0}
-            startTransform: {fileID: 0}
-            startDeltaRotation: {x: 0, y: 0, z: 0}
-            endRotation: {x: 0, y: 0, z: 0}
-            endTransform: {fileID: 0}
-            endDeltaRotation: {x: 0, y: 0, z: 0}
-          _scaleTweenData:
-            sequenceType: 0
-            loopType: 0
-            loopCount: 0
-            duration: 0
-            ease: 0
-            scaleFrom: 0
-            scaleTo: 0
-            startScale: {x: 0, y: 0, z: 0}
-            startTransform: {fileID: 0}
-            startDeltaScale: {x: 0, y: 0, z: 0}
-            endScale: {x: 0, y: 0, z: 0}
-            endTransform: {fileID: 0}
-            endDeltaScale: {x: 0, y: 0, z: 0}
-          _colorTweenData:
-            sequenceType: 0
-            loopType: 0
-            loopCount: 0
-            duration: 0
-            ease: 0
-            colorFrom: 0
-            colorTo: 0
-            startSpecificColor: {r: 0, g: 0, b: 0, a: 0}
-            startOtherGraphic: {fileID: 0}
-            endSpecificColor: {r: 0, g: 0, b: 0, a: 0}
-            endOtherGraphic: {fileID: 0}
-          _fadeTweenData:
-            sequenceType: 0
-            loopType: 0
-            loopCount: 0
-            duration: 0
-            ease: 0
-            fadeFrom: 0
-            fadeTo: 0
-            startAlpha: 0
-            startOtherCanvasGroup: {fileID: 0}
-            endAlpha: 0
-            endOtherCanvasGroup: {fileID: 0}
-      _unityAnimation:
-        _clip: {fileID: 0}
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
-  _onClicks:
-  - type: 1
-    elementName: 
-    element: {fileID: 1061514308}
-    sceneName: 
-    animIndex: 0
-    waitToExecute: 0
-    waitToReuse: 0
-    onClickEvent:
-      m_PersistentCalls:
-        m_Calls: []
+  <FindScrollViewInParent>k__BackingField: 0
+  <ScrollView>k__BackingField: {fileID: 0}
+  <InteractableData>k__BackingField: []
+  <EventTrigger>k__BackingField: {fileID: 0}
+  _onClicks: []
 --- !u!114 &437289969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,12 +924,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 782203393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca3f24d9ac061e14cb1897aa71f6b7af, type: 3}
+  m_Script: {fileID: 11500000, guid: ff6bef79af3cad74391d403f5640ee7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 0}
   _name: 
-  _status: 2
+  _status: 0
   _setAsLastSiblingOnOpen: 1
   _beforeOpen:
     m_PersistentCalls:
@@ -1034,20 +943,11 @@ MonoBehaviour:
   _afterClose:
     m_PersistentCalls:
       m_Calls: []
-  _findScrollViewInParent: 0
-  _scrollView: {fileID: 0}
-  _interactableData: []
-  _onClicks:
-  - type: 2
-    elementName: 
-    element: {fileID: 1061514308}
-    sceneName: 
-    animIndex: 0
-    waitToExecute: 0
-    waitToReuse: 0
-    onClickEvent:
-      m_PersistentCalls:
-        m_Calls: []
+  <FindScrollViewInParent>k__BackingField: 0
+  <ScrollView>k__BackingField: {fileID: 0}
+  <InteractableData>k__BackingField: []
+  <EventTrigger>k__BackingField: {fileID: 0}
+  _onClicks: []
 --- !u!114 &782203399
 MonoBehaviour:
   m_ObjectHideFlags: 0

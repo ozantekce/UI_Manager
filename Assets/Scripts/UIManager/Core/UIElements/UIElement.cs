@@ -24,7 +24,7 @@ namespace UIManager
 
 
         private RectTransform _rectTransform;
-        bool _triedFindToAnimationComponent = false;
+        private bool _triedFindToAnimationComponent = false;
         protected UIAnimationComponent _animationComponent;
 
         protected ElementInfo? _elementInfo = null;

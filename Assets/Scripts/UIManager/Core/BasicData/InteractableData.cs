@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -8,9 +9,9 @@ namespace UIManager
     public class InteractableData
     {
 
-        public EventTriggerType eventTriggerType;
-        public UIAnimationWrapper animationWrapper;
-        public UnityEvent unityEvent;
+        [field: SerializeField] public EventTriggerType EventTriggerType { get; private set; }
+        [field: SerializeField] public UIAnimationWrapper AnimationWrapper { get; private set; }
+        [field: SerializeField] public UnityEvent UnityEvent { get; private set; }
 
     }
 

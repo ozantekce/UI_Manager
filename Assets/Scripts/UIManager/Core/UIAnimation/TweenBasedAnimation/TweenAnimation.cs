@@ -12,9 +12,10 @@ namespace UIManager
 
         public override UIAnimationType AnimationType => UIAnimationType.Tween;
 
-        public LoopType loopType = LoopType.Restart;
+        public bool loop;
 
-        public int loopCount = 0;
+        [ShowIf(nameof(loop))] public LoopType loopType = LoopType.Restart;
+        [ShowIf(nameof(loop))] public int loopCount = 0;
 
         public List<TweenDataWrapper> sequence = new List<TweenDataWrapper>();
 
@@ -81,7 +82,11 @@ namespace UIManager
 
             }
 
-            _sequence.SetLoops(loopCount, loopType);
+            if (loop)
+            {
+                _sequence.SetLoops(loopCount, loopType);
+            }
+
         }
 
         public override void Kill()

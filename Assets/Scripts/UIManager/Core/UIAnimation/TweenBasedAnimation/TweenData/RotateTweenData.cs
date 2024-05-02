@@ -86,12 +86,14 @@ namespace UIManager
             if (space == Space.Local)
             {
                 element.transform.localRotation = rotStart;
-                tween = element.transform.DOLocalRotateQuaternion(rotEnd, duration).SetEase(ease).SetLoops(loopCount, loopType);
+                tween = loop ? element.transform.DOLocalRotateQuaternion(rotEnd, duration).SetEase(ease).SetLoops(loopCount, loopType) :
+                    element.transform.DOLocalRotateQuaternion(rotEnd, duration).SetEase(ease);
             }
             else if (space == Space.World)
             {
                 element.transform.rotation = rotStart;
-                tween = element.transform.DORotateQuaternion(rotEnd, duration).SetEase(ease).SetLoops(loopCount, loopType);
+                tween = loop ? element.transform.DORotateQuaternion(rotEnd, duration).SetEase(ease).SetLoops(loopCount, loopType) :
+                    element.transform.DORotateQuaternion(rotEnd, duration).SetEase(ease);
             }
 
             return tween;

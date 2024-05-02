@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,14 +25,23 @@ namespace UIManager
             base.ConfigurationsAwake();
             _button = gameObject.GetOrAddComponent<Button>();
             _button.onClick.AddListener(BaseOnClick);
-            foreach (OnClickData onClick in _onClicks)
-            {
-                _button.onClick.AddListener(() => ButtonHelper.Execute(onClick));
-            }
+            _button.onClick.AddListener(ExecuteAllOnClicks);
         }
+
+
         public override void ConfigurationsStart()
         {
             base.ConfigurationsStart();
+        }
+
+
+
+        private void ExecuteAllOnClicks()
+        {
+            foreach (OnClickData onClick in _onClicks)
+            {
+                ButtonHelper.Execute(onClick);
+            }
         }
 
 

@@ -170,7 +170,7 @@ namespace UIManager
             if (delay <= 0)
                 Manager.StartCoroutine(CloseRoutine(animIndex));
             else
-                Manager.OpenUIElement(this, delay, animIndex);
+                Manager.CloseUIElement(this, delay, animIndex);
         }
 
         public void Close()

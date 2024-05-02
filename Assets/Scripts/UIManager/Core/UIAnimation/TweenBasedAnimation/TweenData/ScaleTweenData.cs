@@ -85,7 +85,15 @@ namespace UIManager
 
             // Create the tween
             element.transform.localScale = scaleStart;
-            tween = element.transform.DOScale(scaleEnd, duration).SetEase(ease).SetLoops(loopCount, loopType);
+
+            if (loop)
+            {
+                tween = element.transform.DOScale(scaleEnd, duration).SetEase(ease).SetLoops(loopCount, loopType);
+            }
+            else
+            {
+                tween = element.transform.DOScale(scaleEnd, duration).SetEase(ease);
+            }
 
             return tween;
         }

@@ -76,7 +76,15 @@ namespace UIManager
 
             // Create the fade tween
             canvasGroup.alpha = startAlphaValue;
-            Tween tween = canvasGroup.DOFade(endAlphaValue, duration).SetEase(ease).SetLoops(loopCount, loopType);
+            Tween tween;
+            if (loop)
+            {
+                tween = canvasGroup.DOFade(endAlphaValue, duration).SetEase(ease).SetLoops(loopCount, loopType);
+            }
+            else
+            {
+                tween = canvasGroup.DOFade(endAlphaValue, duration).SetEase(ease);
+            }
 
             return tween;
         }

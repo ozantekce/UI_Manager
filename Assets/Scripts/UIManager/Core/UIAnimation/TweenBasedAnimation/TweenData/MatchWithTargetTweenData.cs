@@ -72,7 +72,11 @@ namespace UIManager
                 }
             }
 
-            sequence.SetLoops(loopCount, loopType);
+            if (loop)
+            {
+                sequence.SetLoops(loopCount, loopType);
+            }
+            
             return sequence;
         }
     }

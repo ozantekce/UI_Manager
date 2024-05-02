@@ -9,9 +9,12 @@ namespace UIManager
         
         public SequenceType sequenceType = SequenceType.Append;
 
-        public LoopType loopType = LoopType.Restart;
 
-        public int loopCount = 1;
+        public bool loop;
+
+        [ShowIf(nameof(loop))] public LoopType loopType = LoopType.Restart;
+
+        [ShowIf(nameof(loop))] public int loopCount = 1;
 
         public float duration = 1;
 

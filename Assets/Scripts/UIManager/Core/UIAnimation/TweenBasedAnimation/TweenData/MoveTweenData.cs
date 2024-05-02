@@ -110,13 +110,16 @@ namespace UIManager
             {
                 case Space.Local:
                     element.transform.localPosition = startPos;
-                    return element.transform.DOLocalMove(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType);
+                    return loop ? element.transform.DOLocalMove(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType) :
+                        element.transform.DOLocalMove(endPos, duration).SetEase(ease);
                 case Space.World:
                     element.transform.position = startPos;
-                    return element.transform.DOMove(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType);
+                    return loop ? element.transform.DOMove(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType) :
+                        element.transform.DOMove(endPos, duration).SetEase(ease);
                 case Space.Anchor:
                     element.RectTransform.anchoredPosition = startPos;
-                    return element.RectTransform.DOAnchorPos(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType);
+                    return loop ? element.RectTransform.DOAnchorPos(endPos, duration).SetEase(ease).SetLoops(loopCount, loopType) :
+                        element.RectTransform.DOAnchorPos(endPos, duration).SetEase(ease);
                 default:
                     return null;
             }

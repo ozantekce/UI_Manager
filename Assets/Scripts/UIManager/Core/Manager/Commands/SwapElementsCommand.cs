@@ -17,12 +17,10 @@ namespace UIManager
 
         protected override void ExecuteCommand()
         {
-            Debug.Log("Swap - 1");
             if (IsTerminated)
             {
                 return;
             }
-            Debug.Log("Swap - 2");
             _openCommand.Execute();
             _closeCommand.Execute();
         }

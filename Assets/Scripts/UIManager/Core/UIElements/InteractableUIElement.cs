@@ -82,26 +82,30 @@ namespace UIManager
 
 
             // Setup additional custom event handlers defined in the InteractableData array.
-            foreach (InteractableData interactableData in InteractableData)
+            if(InteractableData != null)
             {
-                EventTrigger.Entry entry = new EventTrigger.Entry();
-                entry.eventID = interactableData.EventTriggerType;
-                entry.callback.AddListener(delegate
+                foreach (InteractableData interactableData in InteractableData)
                 {
-                    if (interactableData.AnimationWrapper != null)
+                    EventTrigger.Entry entry = new EventTrigger.Entry();
+                    entry.eventID = interactableData.EventTriggerType;
+                    entry.callback.AddListener(delegate
                     {
-                        if(AnimationComponent == null)
+                        if (interactableData.AnimationWrapper != null)
                         {
-                            _animationComponent = gameObject.AddComponent<UIAnimationComponent>();
+                            if (AnimationComponent == null)
+                            {
+                                _animationComponent = gameObject.AddComponent<UIAnimationComponent>();
+                            }
+                            BaseUIAnimation animation = interactableData.AnimationWrapper.Animation;
+                            Manager.StartCoroutine(AnimationComponent.PlayCustomAnimation(this, animation));
                         }
-                        BaseUIAnimation animation = interactableData.AnimationWrapper.Animation;
-                        Manager.StartCoroutine(AnimationComponent.PlayCustomAnimation(this, animation));
-                    }
-                    interactableData.UnityEvent?.Invoke();
-                });
-                EventTrigger.triggers.Add(entry);
+                        interactableData.UnityEvent?.Invoke();
+                    });
+                    EventTrigger.triggers.Add(entry);
 
+                }
             }
+
             
         }
 

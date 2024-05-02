@@ -72,7 +72,15 @@ namespace UIManager
             // Create the color tween
             if (graphic != null)
             {
-                tween = graphic.DOColor(endColor, duration).SetEase(ease).SetLoops(loopCount, loopType).From(startColor);
+                if (loop)
+                {
+                    tween = graphic.DOColor(endColor, duration).SetEase(ease).SetLoops(loopCount, loopType).From(startColor);
+                }
+                else
+                {
+                    tween = graphic.DOColor(endColor, duration).SetEase(ease).From(startColor);
+                }
+
             }
 
             return tween;

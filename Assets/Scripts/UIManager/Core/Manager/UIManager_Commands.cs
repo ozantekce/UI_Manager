@@ -9,6 +9,7 @@ namespace UIManager
         private const bool ExecuteOneCommandPerFrame = false;
 
         private Heap<BaseCommand> _commands = new Heap<BaseCommand>();
+        private Dictionary<UIElement, HashSet<BaseCommand>> _waitingCommands = new Dictionary<UIElement, HashSet<BaseCommand>>();
 
 
         private void Update()
@@ -18,6 +19,8 @@ namespace UIManager
                 return;
 
             BaseCommand command = _commands.Remove();
+            HashSet<BaseCommand> waitingSet = _waitingCommands.GetValueOrDefault(command.Element, new HashSet<BaseCommand>());
+            waitingSet.Remove(command);
 
             if (command.IsReady)
             {
@@ -139,6 +142,21 @@ namespace UIManager
         private void AddCommand(BaseCommand command)
         {
             _commands.Insert(command);
+            HashSet<BaseCommand> waitingSet = _waitingCommands.GetValueOrDefault(command.Element, new HashSet<BaseCommand>());
+            waitingSet.Add(command);
+            _waitingCommands[command.Element] = waitingSet;
+        }
+
+
+        public void SkipCommands(UIElement element)
+        {
+            HashSet<BaseCommand> waitingSet = _waitingCommands.GetValueOrDefault(element, new HashSet<BaseCommand>());
+
+            foreach (var command in waitingSet)
+            {
+                command.SkipCommand();
+            }
+
         }
 
 

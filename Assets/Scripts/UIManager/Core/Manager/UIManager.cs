@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UIManager
 {
 
@@ -34,8 +38,11 @@ namespace UIManager
 
             foreach (UIElement uiElement in cachedElements)
             {
-                AddElement(uiElement);
-                uiElement.ConfigurationsAwake();
+                if(uiElement != null)
+                {
+                    AddElement(uiElement);
+                    uiElement.ConfigurationsAwake();
+                }
             }
 
         }
@@ -57,12 +64,21 @@ namespace UIManager
             {
                 Instance = null;
             }
+            
+            while (_commands.Count > 0)
+            {
+                BaseCommand command = _commands.Remove();
+                command.OnManagerDestroy();
+            }
+            
         }
 
 
+#if UNITY_EDITOR
         public void FindAndStoreUIElements()
         {
             _elements = FindAllUIElementsInScene();
+            EditorUtility.SetDirty(this);
         }
 
         private List<UIElement> FindAllUIElementsInScene()
@@ -84,7 +100,7 @@ namespace UIManager
 
         }
 
-
+#endif
 
 
         public void AddElement(UIElement uiElement)

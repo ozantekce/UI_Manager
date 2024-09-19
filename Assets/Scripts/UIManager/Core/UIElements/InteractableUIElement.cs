@@ -9,7 +9,7 @@ namespace UIManager
     /// This component requires an EventTrigger to work.
     /// </summary>
     [RequireComponent(typeof(EventTrigger))]
-    public class InteractableUIElement : UIElement, IInteractableUIElement
+    public class InteractableUIElement : UIElement
     {
         /// <summary>
         /// Indicates whether to search for a ScrollRect component in the parent GameObjects.

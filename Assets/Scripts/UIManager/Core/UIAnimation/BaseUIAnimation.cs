@@ -12,7 +12,7 @@ namespace UIManager
         public abstract bool IsPlaying { get; }
         public abstract IEnumerator Enumerator(UIElement element);
 
-        public abstract void Kill();
+        public abstract void Kill(bool complete = false);
 
         public static BaseUIAnimation Create(UIAnimationType animationType)
         {

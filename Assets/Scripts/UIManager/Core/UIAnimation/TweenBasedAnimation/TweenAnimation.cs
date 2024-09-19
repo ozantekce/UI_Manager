@@ -66,7 +66,7 @@ namespace UIManager
 
         public void ConvertSequence(UIElement element)
         {
-            _sequence = DOTween.Sequence();
+            _sequence = DOTween.Sequence(element.transform);
 
             foreach (TweenDataWrapper data in sequence)
             {
@@ -89,9 +89,9 @@ namespace UIManager
 
         }
 
-        public override void Kill()
+        public override void Kill(bool complete = false)
         {
-            _sequence.Kill();
+            _sequence.Kill(complete);
         }
         public override bool IsPlaying => _sequence != null && _sequence.active;
     }

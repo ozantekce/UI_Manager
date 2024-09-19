@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ namespace UIManager
         [SerializeField, ShowInEnum(nameof(textType), nameof(ExtendedTextType.TextMeshPro))] private TextMeshProUGUI _textMeshPro;
         [SerializeField, ShowInEnum(nameof(textType), nameof(ExtendedTextType.UnityText))]   private Text _unityText;
 
-        private TextMethod _textMethod;
+        private Func<string> _textMethod;
 
         [SerializeField] private float _updateDelay = 0.2f;
 
@@ -75,7 +76,7 @@ namespace UIManager
         }
 
 
-        public void UpdateTextMethod(TextMethod textMethod)
+        public void SetTextMethod(Func<string> textMethod)
         {
             _textMethod = textMethod;
         }
@@ -84,9 +85,6 @@ namespace UIManager
         {
             _textMethod = null;
         }
-
-
-
 
 
         #region GetterSetter
@@ -108,7 +106,7 @@ namespace UIManager
 
         }
 
-        public TextMethod TextMethod { get => _textMethod; private set => _textMethod = value; }
+        public Func<string> TextMethod { get => _textMethod; private set => _textMethod = value; }
 
         
 
@@ -117,9 +115,6 @@ namespace UIManager
 
 
     }
-
-
-    public delegate string TextMethod();
 
     
 

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace UIManager
 {
 
-    public class UIElement : MonoBehaviour, IUIElement
+    public class UIElement : MonoBehaviour
     {
 
         [SerializeField] private UIManager _manager;
@@ -14,6 +14,7 @@ namespace UIManager
         [SerializeField] private string _name;
         [SerializeField, ReadOnly] private UIElementStatus _status;
         [SerializeField] bool _setAsLastSiblingOnOpen = true;
+        [SerializeField] bool _startWithOpenAnimation = false;
 
         #region Events
         [SerializeField] private UnityEvent _beforeOpen;
@@ -47,12 +48,19 @@ namespace UIManager
 
         protected virtual void Start()
         {
+            ElementInfo info = new ElementInfo(this);
+            _elementInfo = info;
             if (!_configurationsStartExecuted)
             {
                 if (Manager != null)
                 {
                     ConfigurationsStart();
                 }
+            }
+
+            if (_startWithOpenAnimation)
+            {
+                Manager.StartCoroutine(AnimationComponent.PlayAnimation(this, AnimationExecuteTime.Open, 0));
             }
         }
 
@@ -109,10 +117,18 @@ namespace UIManager
 
         public void Open(float delay = 0f, int animIndex = 0)
         {
-            if (delay <= 0)
-                Manager.StartCoroutine(OpenRoutine(animIndex)); // execute request directly
+            if(Manager == null)
+            {
+                ForceOpen();
+            }
             else
-                Manager.OpenUIElement(this, delay, animIndex); // send request to manager
+            {
+                if (delay <= 0)
+                    Manager.StartCoroutine(OpenRoutine(animIndex)); // execute request directly
+                else
+                    Manager.OpenUIElement(this, delay, animIndex); // send request to manager
+            }
+
         }
 
         public void Open()
@@ -161,16 +177,26 @@ namespace UIManager
             //Debug.Log("OPEN");
             Status = UIElementStatus.Opened;
             gameObject.SetActive(true);
-            transform.SetAsLastSibling();
+            if (_setAsLastSiblingOnOpen)
+            {
+                transform.SetAsLastSibling();
+            }
         }
 
 
         public void Close(float delay = 0, int animIndex = 0)
         {
-            if (delay <= 0)
-                Manager.StartCoroutine(CloseRoutine(animIndex));
+            if(Manager == null)
+            {
+                ForceClose();
+            }
             else
-                Manager.CloseUIElement(this, delay, animIndex);
+            {
+                if (delay <= 0)
+                    Manager.StartCoroutine(CloseRoutine(animIndex));
+                else
+                    Manager.CloseUIElement(this, delay, animIndex);
+            }
         }
 
         public void Close()
@@ -217,16 +243,22 @@ namespace UIManager
 
         public void ForceOpen()
         {
-            AnimationComponent.KillActiveAnimation();
+            if(AnimationComponent != null)
+            {
+                AnimationComponent.KillActiveAnimation();
+            }
             Status = UIElementStatus.Opened;
             gameObject.SetActive(true);
         }
 
         public void ForceClose()
         {
-            AnimationComponent.KillActiveAnimation();
+            if(AnimationComponent != null)
+            {
+                AnimationComponent.KillActiveAnimation();
+            }
             Status = UIElementStatus.Closed;
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
 
 

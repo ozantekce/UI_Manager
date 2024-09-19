@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace UIManager
 {
 
@@ -24,6 +22,18 @@ namespace UIManager
             _openCommand.Execute();
             _closeCommand.Execute();
         }
+
+
+        public override void OnManagerDestroy()
+        {
+            UIElement element1 = _openCommand.Element;
+            UIElement element2 = _closeCommand.Element;
+            if(element1 != null)
+                element1.ForceClose();
+            if(element2 != null)
+                element2.ForceClose();
+        }
+
 
         public override bool IsTerminated
         {

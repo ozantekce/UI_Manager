@@ -49,7 +49,7 @@ namespace UIManager
 
         }
 
-        public override void Kill()
+        public override void Kill(bool complete = false)
         {
             _animation.Stop();
         }

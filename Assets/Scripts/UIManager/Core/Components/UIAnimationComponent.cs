@@ -104,18 +104,18 @@ namespace UIManager
         /// <summary>
         /// Immediately stops any active animation.
         /// </summary>
-        public void KillActiveAnimation()
+        public void KillActiveAnimation(bool complete = false)
         {
             if (IsPlayingAnimation())
             {
                 if (_currentAnimationExecuteTime.Value == AnimationExecuteTime.Custom)
                 {
-                    _customAnimation.Kill();
+                    _customAnimation.Kill(complete);
                 }
                 else
                 {
                     BaseUIAnimation animation = GetAnimation(_currentAnimationExecuteTime.Value, _currentAnimationIndex.Value);
-                    animation.Kill();
+                    animation.Kill(complete);
                 }
             }
         }

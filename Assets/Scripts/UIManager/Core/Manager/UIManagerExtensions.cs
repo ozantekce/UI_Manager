@@ -1,4 +1,6 @@
 
+using System;
+
 namespace UIManager
 {
     public static class UIManagerExtensions
@@ -66,12 +68,12 @@ namespace UIManager
             
         }
 
-        public static void SetExtendedTextMethod(this string name, TextMethod textMethod)
+        public static void SetExtendedTextMethod(this string name, Func<string> textMethod)
         {
             UIExtendedText extendedText = name.GetUIElement<UIExtendedText>();
             if(extendedText == null)
             {
-                extendedText.UpdateTextMethod(textMethod);
+                extendedText.SetTextMethod(textMethod);
             }
         }
 

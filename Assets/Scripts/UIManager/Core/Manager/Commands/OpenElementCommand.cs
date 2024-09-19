@@ -28,6 +28,13 @@ namespace UIManager
             _element.Open(0, AnimIndex);
         }
 
+        public override void OnManagerDestroy()
+        {
+            if (Element != null)
+                Element.ForceClose();
+        }
+
+
         /// <summary>
         /// Gets a value indicating whether the command is terminated.
         /// </summary>

@@ -14,6 +14,7 @@ namespace UIManager
         private int _animIndex;
 
         private bool _isTerminated;
+        private bool _skipCommand;
         private readonly float _createTime;
 
         protected BaseCommand(UIElement element, float delay, int animIndex)
@@ -40,7 +41,10 @@ namespace UIManager
         /// </summary>
         public void Execute()
         {
-            ExecuteCommand();
+            if(!_skipCommand)
+                ExecuteCommand();
+            else
+                _isTerminated = true;
         }
 
         /// <summary>
@@ -48,11 +52,23 @@ namespace UIManager
         /// </summary>
         protected abstract void ExecuteCommand();
 
+
+        public virtual void OnManagerDestroy()
+        {
+
+        }
+
+        public virtual void SkipCommand()
+        {
+            _skipCommand = true;
+        }
+
+
         public float RemainingTime => Delay - (Time.time - _createTime);
 
         public float Delay { get => _delay; private set => _delay = value; }
 
-        public bool IsReady => Time.time - _createTime >= Delay;
+        public bool IsReady => Time.time - _createTime >= Delay || _skipCommand;
 
         public virtual bool IsTerminated { get => _isTerminated; protected set => _isTerminated = value; }
 
